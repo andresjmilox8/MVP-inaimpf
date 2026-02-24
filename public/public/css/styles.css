@@ -1,0 +1,886 @@
+/**
+ * =====================================================
+ * ESTILOS CSS - Control de Asistencia
+ * =====================================================
+ * 
+ * CSS controla cómo se VE la página:
+ * - Colores, tamaños, espacios
+ * - Disposición de elementos
+ * - Animaciones y efectos
+ * 
+ * CONCEPTOS BÁSICOS:
+ * - selector { propiedad: valor; }
+ * - Clases se definen con punto: .nombre-clase
+ * - IDs se definen con numeral: #nombre-id
+ */
+
+/* =====================================================
+   RESET Y ESTILOS BASE
+   =====================================================
+   Elimina márgenes por defecto y establece la tipografía
+*/
+* {
+    margin: 0;
+    padding: 0;
+        box-sizing: border-box; /* Hace que el padding no aumente el tamaño */
+    }
+
+body {
+    /* 
+    font-family: Tipografía a usar (con alternativas)
+    min-height: Altura mínima de toda la pantalla
+    background: Degradado de colores de fondo
+    */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #e0f2fe 0%, #efdafb 100%);
+    padding: 20px;
+}
+
+/* =====================================================
+   CONTENEDOR PRINCIPAL
+   =====================================================
+   Centra todo el contenido y limita su ancho máximo
+*/
+.container {
+    max-width: 900px;      /* Ancho máximo */
+    margin: 0 auto;        /* Centra horizontalmente */
+    padding: 20px;
+}
+
+/* =====================================================
+   ENCABEZADO
+   =====================================================
+*/
+.header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.header h1 {
+    color: #1e3a5f;        /* Azul oscuro */
+    font-size: 2.5rem;     /* rem = tamaño relativo al root */
+    margin-bottom: 8px;
+}
+
+.header p {
+    color: #3b82f6;        /* Azul medio */
+    font-size: 1.1rem;
+    font-weight: bold;
+    opacity: 0.8;          /* Transparencia (0-1) */
+}
+
+/* =====================================================
+   MENÚ DE NAVEGACIÓN (NAVBAR)
+   ===================================================== */
+.navbar {
+    background-color: #2563eb; /* Azul de cards */
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    margin: -20px -20px 20px -20px; 
+    border-radius: 0; /* Bordes rectos */
+    flex-wrap: wrap; /* Permite que el menú móvil empuje el contenido hacia abajo */
+}
+
+.nav-brand {
+    color: white;
+    font-size: 1.2rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 8px 12px;
+    border-radius: 6px;
+    transition: background 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.nav-links a:hover, .nav-links a.active {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.nav-links a.btn-logout {
+    background-color: #ef4444;
+}
+.nav-links a.btn-logout:hover {
+    background-color: #dc2626;
+}
+
+/* Botón Hamburguesa (Oculto en PC) */
+.menu-hamburguesa {
+    display: none;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+/* =====================================================
+   TARJETAS (Cards)
+   =====================================================
+   Contenedores con fondo blanco y sombra
+*/
+.card {
+    background: white;
+    border-radius: 12px;           /* Esquinas redondeadas */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    margin-bottom: 24px;
+    overflow: hidden;              /* Oculta contenido que se sale */
+}
+
+.card-header {
+    background: #2563eb;           /* Azul primario */
+    color: white;
+    padding: 16px 20px;
+    display: flex;                 /* Flexbox para alinear elementos */
+    justify-content: space-between; /* Espacio entre elementos */
+    align-items: center;           /* Centrado vertical */
+}
+
+.card-header h2 {
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.card-content {
+    padding: 24px;
+}
+
+/* =====================================================
+   FORMULARIO
+   =====================================================
+*/
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;                /* Ocupa toda la línea */
+    margin-bottom: 8px;
+    color: #1e3a5f;
+    font-weight: 500;
+    font-size: 20px;
+}
+
+/* Estilos para input y select */
+.form-group input,
+.form-group select {
+    width: 100%;                   /* Ocupa todo el ancho disponible */
+    padding: 12px 16px;
+    border: 2px solid #bfdbfe;     /* Borde azul claro */
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s; /* Animación suave al cambiar */
+}
+
+/* Estado "focus" cuando el usuario hace clic en el campo */
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;                 /* Quita el borde por defecto */
+    border-color: #2563eb;         /* Cambia a azul más oscuro */
+}
+
+/* =====================================================
+   BOTONES
+   =====================================================
+*/
+.btn-primary {
+    width: 100%;
+    padding: 16px;
+    background: #f3465d;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;               /* Muestra mano al pasar el mouse */
+    transition: background 0.3s;   /* Animación suave */
+}
+
+
+.btn-primary:hover {
+    background: #e98e9a;           /* Más oscuro al pasar el mouse */
+}
+
+.btn-primary:disabled {
+    background: #93c5fd;           /* Gris-azul cuando está deshabilitado */
+    cursor: not-allowed;
+}
+
+.btn-secondary-EX {
+    width: 100%;
+    padding: 16px;
+    background: #2563eb;       /* Color rosa base */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s; /* Esto activa la animación */
+}
+
+/* Hover para el botón GRIS */
+.btn-secondary-EX:hover {
+    background: #1d4ed8;       /* Gris más oscuro al pasar el mouse */
+}
+
+.btn-secondary-EX:disabled {
+    background: #93c5fd;           /* Gris-azul cuando está deshabilitado */
+    cursor: not-allowed;
+}
+
+.btn-secondary {
+    padding: 10px 20px;
+    background: transparent;
+    color: white;
+    border: 2px solid white;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-secondary:hover {
+    background: white;
+    color: #2563eb;
+}
+
+.btn-secondary:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.btn-cancel {
+    padding: 12px 24px;
+    background: #e5e7eb;
+    color: #374151;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.btn-cancel:hover {
+    background: #d1d5db;
+}
+
+/* =========================================
+   BOTÓN DE SALIDA (ICONO ANIMADO)
+   ========================================= */
+.btn-icono-salida {
+    background: none;
+    border: none;
+    color: #94a3b8; /* Gris sutil */
+    cursor: pointer;
+    transition: all 0.3s ease; /* Animación suave */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.btn-icono-salida:hover {
+    color: #ef4444; /* Rojo alerta */
+    transform: scale(1.25); /* Se agranda un 25% */
+}
+
+                           
+
+/* =====================================================
+   TABLA
+   =====================================================
+*/
+table {
+    width: 100%;
+    border-collapse: collapse;     /* Une los bordes de las celdas */
+}
+
+thead {
+    background: #f0f9ff;           /* Fondo azul muy claro */
+}
+
+th, td {
+    padding: 14px 16px;
+    text-align: left;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+th {
+    color: #1e3a5f;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+td {
+    color: #374151;
+}
+
+/* Efecto hover en las filas */
+tbody tr:hover {
+    background: #f0f9ff;
+}
+
+/* Estilo para el badge del departamento */
+.badge {
+    display: inline-block;
+    padding: 4px 12px;
+    background: #dbeafe;
+    color: #1e40af;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+/* Mensaje cuando la tabla está vacía */
+.mensaje-vacio {
+    text-align: center;
+    color: #93c5fd;
+    padding: 40px;
+    font-size: 1rem;
+}
+
+/* =========================================
+   SCROLL HORIZONTAL PARA LA TABLA
+   ========================================= */
+.tabla-responsiva {
+    width: 100%;
+    overflow-x: auto; /* crea la barra de scroll */
+    -webkit-overflow-scrolling: touch; /* Hace que el scroll sea suave en teléfonos */
+}
+
+/* Evita que los textos largos se partan en varias líneas y dañen el diseño */
+.tabla-responsiva table {
+    white-space: nowrap; 
+}
+
+/* =========================================
+   BARRA DE BÚSQUEDA
+   ========================================= */
+
+   .busqueda-container{
+    margin-bottom: 15px;
+    width: 100%;
+   }
+
+   #buscador {
+    width: 100%;
+    padding: 12px;
+    border: 1px #cbd5e1;
+    border-radius: 8px;
+    font-size: 15px;
+    outline: none;
+    transition: border-color 0.3s ;
+   }
+
+   #buscador-empleados{
+    width: 100%;
+    padding: 12px;
+    border: 1px #cbd5e1;
+    border-radius: 8px;
+    font-size: 15px;
+    outline: none;
+    transition: border-color 0.3s ;
+   }
+
+   #buscador:focus{
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+   }
+
+   #buscador-empleados:focus{
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+   }
+/* =====================================================
+   FOOTER (Pie de página)
+   =====================================================
+*/
+.footer {
+    text-align: center;
+    margin-top: 20px;
+    color: #3b82f6;
+    font-size: 0.95rem;
+}
+
+.footer strong {
+    color: #1e3a5f;
+}
+
+/* =====================================================
+   MODAL (Ventana emergente)
+   =====================================================
+*/
+.modal {
+    display: none;                 /* Oculto por defecto */
+    position: fixed;               /* Fijo en la pantalla */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Fondo semi-transparente */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;                 /* Encima de todo */
+}
+
+.modal.activo {
+    display: flex;                 /* Visible cuando tiene clase "activo" */
+}
+
+.modal-content {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    max-width: 450px;
+    width: 90%;
+    text-align: center;
+    animation: aparecer 0.3s ease;
+}
+
+/* Animación de aparición */
+@keyframes aparecer {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.modal-content h3 {
+    color: #1e3a5f;
+    margin-bottom: 16px;
+    font-size: 1.3rem;
+}
+
+.modal-content p {
+    color: #6b7280;
+    margin-bottom: 24px;
+    line-height: 1.6;
+}
+
+.modal-buttons {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+}
+
+.modal-buttons .btn-primary {
+    width: auto;
+    padding: 12px 24px;
+}
+
+/* Estilos para el texto del modal de salida */
+.texto-modal-salida {
+    margin: 15px 0;
+    font-size: 16px;
+}
+
+
+.celda-salida {
+    text-align: center;
+    
+}
+
+/* modal en Gestion */
+
+.titulo-advertencia {
+    color: #ef4444; /* Rojo alerta */
+}
+
+.texto-advertencia {
+    margin: 20px 0;
+    font-size: 1.1rem;
+    color: #475569; /* Gris oscuro */
+}
+
+/* =====================================================
+   NOTIFICACIÓN (Toast)
+   =====================================================
+   Mensaje temporal que aparece y desaparece
+*/
+.notificacion {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: #1e3a5f;
+    color: white;
+    padding: 16px 24px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transform: translateY(100px);  /* Fuera de la pantalla */
+    opacity: 0;
+    transition: all 0.3s ease;
+    z-index: 1001;
+}
+
+.notificacion.visible {
+    transform: translateY(0);      /* En posición */
+    opacity: 1;
+}
+
+/* Estilo para el logo dentro del título */
+.logo-instituto {
+    height: 60px;           
+    width: auto;            
+    vertical-align: middle; 
+    margin-right: 15px; 
+}
+
+/* =====================================================
+   Estilos específicos solo para el Dashboard
+   =====================================================
+*/
+
+.dashboard-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 90vh;
+        }
+        .dashboard-title {
+            color: #1e3a5f;
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            width: 100%;
+            max-width: 900px;
+        }
+        .dash-card {
+            border-radius: 16px;
+            padding: 40px 20px;
+            color: white;
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .dash-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+        .dash-card svg {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 20px;
+        }
+        .dash-card h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        
+        /* Colores de las tarjetas basados en tu maqueta */
+        .card-red { background-color: #A61113; }
+        .card-blue { background-color: #3b82f6; }
+        .card-green { background-color: #10b981;}
+
+        .Logo_INAIMPF{
+            height: 300px;
+            margin-bottom: 20px;
+        }
+
+/* =====================================================
+   ESTILOS PARA GESTIÓN DE PERSONAL (CRUD)
+   ===================================================== */
+/* Alinear etiquetas de los modales a la izquierda */
+
+.container-gestion {
+    max-width: 1100px; 
+}
+
+
+/* Estilo para inputs bloqueados (como la cédula que no se edita) */
+.input-disabled {
+    background-color: #f1f5f9;
+    color: #64748b;
+    cursor: not-allowed;
+}
+
+/* Botón de editar (Lápiz azul) en la tabla */
+.btn-icono-editar {
+    background: none;
+    border: none;
+    color: #2563eb; 
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.btn-icono-editar:hover {
+    color: #1d4ed8; 
+    transform: scale(1.25);
+}
+
+/* Para alinear los iconos SVG con los títulos h1, h2, h3 */
+.titulo-con-icono {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+/* Botón verde de añadir empleado */
+.btn-agregar {
+    background-color: #10b981; /* Verde esmeralda */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.3s, background 0.3s;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.btn-agregar:hover {
+    background-color: #059669; /* Verde oscuro */
+    transform: scale(1.1);
+}
+
+.btn-gestion-plus {
+    width: 100%;
+    padding: 16px;
+    background: #10b981;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;               /* Muestra mano al pasar el mouse */
+    transition: background 0.3s;   /* Animación suave */
+}
+
+
+.btn-gestion-plus:hover {
+    background: #96f1d3;           /* Más oscuro al pasar el mouse */
+}
+
+.btn-gestion-plus:disabled {
+    background: #93c5fd;           /* Gris-azul cuando está deshabilitado */
+    cursor: not-allowed;
+}
+
+/* =====================================================
+   CLASES UTILITARIAS PARA MODALES LIMPIOS
+   ===================================================== */
+.mb-25 {
+    margin-bottom: 25px;
+}
+
+.mt-25 {
+    margin-top: 25px;
+}
+
+.titulo-verde {
+    color: #10b981; /* Verde esmeralda */
+}
+
+/* Modificador para botón verde */
+.btn-verde {
+    background-color: #10b981;
+}
+
+.btn-verde:hover {
+    background-color: #059669;
+}
+
+/* =====================================================
+   PANTALLA DE LOGIN (SPLIT SCREEN)
+   ===================================================== */
+/* Usamos una clase en el body para quitar los márgenes por defecto solo en esta página */
+.body-login {
+    padding: 0;
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+    background-color: #efdafb;
+}
+
+.login-split-container {
+    display: flex;
+    height: 100vh;
+    width: 100%;
+}
+
+/* MITAD IZQUIERDA: CARRUSEL */
+.carousel-section {
+    flex: 1; /* Ocupa todo el espacio restante */
+    position: relative;
+    overflow: hidden;
+    background-color: #f4f4f4;
+}
+
+.carousel-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Asegura que la imagen llene el espacio sin deformarse */
+    object-position: center;
+    opacity: 0;
+    transition: opacity 1.5s ease-in-out; /* Animación de desvanecimiento suave */
+}
+
+.carousel-img.activa {
+    opacity: 1;
+}
+
+/* MITAD DERECHA: FORMULARIO */
+.login-section {
+    width: 550px; /* Ancho fijo para el formulario */
+    background: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    box-shadow: -10px 0 20px rgba(0,0,0,0.15); /* Sombra hacia la izquierda */
+    z-index: 10;
+}
+
+#loginForm label{
+    text-align: left;
+}
+
+.login-box {
+    width: 100%;
+    text-align: center;
+}
+
+.login-logo {
+    width: 180px;
+    margin-bottom: 30px;
+}
+
+.login-box h2 {
+    color: #1e3a5f;
+    margin-bottom: 30px;
+    font-size: 1.8rem;
+}
+
+
+/* =====================================================
+   RESPONSIVE (Adaptación a móviles)
+   =====================================================
+   @media: Aplica estilos solo cuando la pantalla es menor a 600px
+*/
+@media (max-width: 600px) {
+    .header h1 {
+        font-size: 1.8rem;
+    }
+    
+    .card-header {
+        flex-direction: column;    /* Elementos en columna */
+        gap: 12px;
+    }
+    
+    .modal-buttons {
+        flex-direction: column;
+    }
+    
+    .notificacion {
+        left: 20px;
+        right: 20px;
+        bottom: 20px;
+    }
+
+        .logo-instituto {
+        height: 40px;       
+        display: block;     
+        margin: 0 auto 10px auto; 
+    }
+
+    /* Estilos móviles para el Nav */
+    .menu-hamburguesa {
+        display: block;
+    }
+        .nav-links {
+        width: 100%;
+        flex-direction: column;
+        
+        /* Magia de la animación: Empezamos con altura 0 y oculto */
+        max-height: 0; 
+        overflow: hidden; 
+        padding: 0; 
+        transition: max-height 0.4s ease-in-out, padding 0.4s ease-in-out;
+    }
+
+    .nav-links.mostrar {
+        /* Al hacer clic, crece hasta los 300px suavemente */
+        max-height: 300px; 
+        padding-top: 15px; 
+    }
+    
+    /* Hacemos que los botones móviles ocupen todo el ancho y se centren */
+    .nav-links a {
+        width: 100%;
+        justify-content: center;
+    
+            }
+/* Adaptación para celulares: Ocultamos el carrusel y dejamos solo el login */
+
+        .login-split-container {
+        flex-direction: column;
+    }
+    .carousel-section {
+        display: none; 
+    }
+    .login-section {
+        width: 100%;
+        height: 100vh;
+        box-shadow: none;
+    }
+   }
+    
+
+
+/* =====================================================
+   OCULTAR FLECHAS DEL CAMPO DE NÚMERO (CÉDULA)
+   ===================================================== */
+/* Chrome, Safari, Edge, Opera */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}

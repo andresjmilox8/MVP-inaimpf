@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>    <!-- 
+    =====================================================
+    EXPLICACIÓN DEL HEAD (Cabecera del documento)
+    =====================================================
+    - charset="UTF-8": Permite usar caracteres especiales como ñ, á, é
+    - viewport: Hace que la página se vea bien en celulares
+    - title: El texto que aparece en la pestaña del navegador
+    - link: Conecta el archivo CSS para los estilos
+    -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="copyright" content="Andres Ramos, Brayan Marquez, Leniska Campos, Michael Andrade">
+    <meta name="author" content="Andres Ramos, Brayan Marquez, Leniska Campos, Michael Andrade">
+    <title>Control de Asistencia</title>
+    <link rel="icon" href="img/logo_inaimpf.png" type="image/png">
+        <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<nav class="navbar">
+        <div class="nav-brand">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+            INAIMPF
+        </div>
+        
+        <button class="menu-hamburguesa" onclick="toggleMenu()">☰</button>
+        
+        <div class="nav-links" id="menu-enlaces">
+            <a href="dashboard.html">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                Inicio
+            </a>
+            <a href="index.html" class="active">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                Asistencia
+            </a>
+            <a href="gestion.html">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                Gestión de Personal
+            </a>
+            <a href="#" class="btn-logout" onclick="cerrarSesion()">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+                Salir
+            </a>
+        </div>
+    </nav>
+
+    <!-- 
+    =====================================================
+    ESTRUCTURA PRINCIPAL DE LA PÁGINA
+    =====================================================
+    -->
+    
+    <div class="container">
+        <!-- ENCABEZADO: Título del sistema -->
+        <header class="header">
+            <h1>
+                <img src="./img/logo_inaimpf.png" alt="Logo INAIMPF" class="logo-instituto">
+                Control de Asistencia INAIMPF.</h1>
+            <p>Sistema de registro de entrada de empleados</p>
+        </header>
+
+        <!-- 
+        =====================================================
+        FORMULARIO DE REGISTRO
+        =====================================================
+        Este formulario captura:
+        1. Nombre del empleado
+        2. Departamento seleccionado
+        -->
+        <section class="card form-card">
+            <div class="card-header">
+                <h2>⏰ Registro de Entrada</h2>
+            </div>
+            
+            <div class="card-content">
+                <!-- Campo para el nombre -->
+                <div class="form-group">
+                    <label for="nombre">
+                        👤 Nombre del Empleado
+                    </label>
+                    <!-- 
+                    id="nombre": Identificador único para JavaScript
+                    placeholder: Texto guía que desaparece al escribir
+                    -->
+                    <input 
+                        type="text" 
+                        id="nombre"
+                        autocomplete="on" 
+                        placeholder="Ingresa el nombre completo"
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="cedula">
+                        💳 Cédula de Identidad
+                    </label>
+                    <input 
+                        type="number" 
+                        id="cedula"
+                        autocomplete="off" 
+                        placeholder="ingrese la cedula del empleado"
+                        min="0"
+                        oninput="if(this.value.length > 9) this.value = this.value.slice(0, 9);"
+                        onchange="buscarEmpleadoPorCedula()" 
+                        
+                    > <!--El evento oninput hace que el usuario no escriba mas de 9 digitos-->
+                </div>
+
+                <!-- Campo para el departamento -->
+                <div class="form-group">
+                    <label for="departamento">
+                        🏢 Departamento
+                    </label>
+                    <!-- 
+                    select: Crea una lista desplegable
+                    Las opciones se agregan con JavaScript desde un array
+                    -->
+                    <select id="departamento">
+                        <option value="">Selecciona departamento</option>
+                        <!-- Las opciones se llenan con JavaScript -->
+                    </select>
+                </div>
+
+                <!-- 
+                Botón de registro
+                onclick: Ejecuta la función registrarEntrada() al hacer clic
+                -->
+                <button class="btn-primary" onclick="registrarEntrada()">
+                    ⏰ Registrar Entrada
+                </button>
+            </div>
+        </section>
+
+        <!-- 
+        =====================================================
+        TABLA DE REGISTROS DEL DÍA
+        =====================================================
+        Muestra todos los empleados que han registrado entrada hoy
+        -->
+        <section class="card table-card">
+            <div class="card-header">
+                <h2>📊 Registros de Hoy</h2>
+                <!-- Botón para exportar a PDF -->
+                <button class="btn-secondary" onclick="confirmarExportacion()">
+                    📥 Exportar PDF
+                </button>
+            </div>
+            
+            <div class="card-content">
+
+
+        <div class="busqueda-container">
+            <input type="text"
+            id="buscador"
+            placeholder="🔍 Buscar por nombre, cédula o departamento..."
+            onkeyup="filtrarTabla()"
+            >
+        </div>
+
+                <!-- 
+                Tabla HTML con estructura:
+                - thead: Encabezados de columnas
+                - tbody: Cuerpo donde van los datos (id="tabla-registros")
+                -->
+                <div class="tabla-responsiva">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Cédula</th> <th>Departamento</th>
+                                <th>Hora de Entrada</th>
+                                <th>Hora de Salida</th>
+                                <th>Acción</th>
+                            </tr>
+                        </thead>
+                    <!-- El id permite que JavaScript agregue filas aquí -->
+                    <tbody id="tabla-registros">
+                        <!-- Las filas se agregan dinámicamente con JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+                
+                <!-- Mensaje cuando no hay registros -->
+                <p id="mensaje-vacio" class="mensaje-vacio">
+                    No hay registros aún. Registra la primera entrada del día.
+                </p>
+            </div>
+        </section>
+
+        <!-- Contador de registros totales -->
+        <footer class="footer">
+            <p>Total de registros hoy: <strong id="contador">0</strong></p>
+        </footer>
+    </div>
+
+    <!-- 
+    =====================================================
+    MODALES DE CONFIRMACIÓN
+    =====================================================
+-->
+
+<div id="modal-salida" class="modal">
+    <div class="modal-content">
+        <h3>🚪 Confirmar Salida</h3>
+        
+        <p id="texto-confirmacion-salida" class="texto-modal-salida"></p>
+        
+        <div class="modal-buttons">
+            <button class="btn-cancel" onclick="cerrarModalSalida()">
+                Cancelar
+            </button>
+            <button class="btn-primary" onclick="ejecutarSalida()">
+                Confirmar Salida
+            </button>
+        </div>
+    </div>
+</div>
+
+    <!-- Ventana emergente que aparece antes de exportar para confirmar que el usuario quiere hacerlo-->
+    
+    
+    <div id="modal-confirmacion" class="modal">
+        <div class="modal-content">
+            <h3>Opciones de Exportación</h3>
+            <p>
+                ¿Deseas vaciar la tabla después de generar el PDF?
+                Elige "Solo Exportar" para guardar el archivo y mantener los datos en pantalla.
+            </p>
+            
+            <div class="modal-buttons">
+                <button class="btn-cancel" onclick="cerrarModal()">
+                    Cancelar
+                </button>
+                
+                <button class="btn-secondary-EX" onclick="exportarSolo()">
+                    Solo Exportar
+                </button>
+                
+                <button class="btn-primary" onclick="exportarYVaciar()">
+                    Exportar y Vaciar
+                </button>
+            </div>
+        </div>
+    </div>
+
+ 
+    <!-- 
+    =====================================================
+    NOTIFICACIÓN (TOAST)
+    =====================================================
+    Mensaje temporal que aparece para confirmar acciones
+    -->
+    <div id="notificacion" class="notificacion">
+        <p id="notificacion-texto"></p>
+    </div>
+
+    <!-- 
+    =====================================================
+    SCRIPTS (Archivos JavaScript)
+    =====================================================
+    jspdf: Librería externa para crear archivos PDF
+    jspdf-autotable: Extensión para crear tablas en PDF
+    script.js: Nuestro código personalizado
+    -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.1/jspdf.plugin.autotable.min.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>

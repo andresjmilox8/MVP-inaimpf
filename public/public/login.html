@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="copyright" content="Andres Ramos, Brayan Marquez, Leniska Campos, Michael Andrade">
+    <meta name="author" content="Andres Ramos, Brayan Marquez, Leniska Campos, Michael Andrade">
+    <title>Acceso - INAIMPF</title>
+    <link rel="icon" href="img/logo_inaimpf.png" type="image/png">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="body-login">
+
+    <div class="login-split-container">
+        
+        <div class="carousel-section">
+            <img src="./img/mujer-1.jpg" class="carousel-img activa" alt="Fondo 1">
+            <img src="./img/mujer-3.png" class="carousel-img" alt="Fondo 2">
+            <img src="./img/mujer-4.jpg" class="carousel-img" alt="Fondo 3">
+            <img src="./img/mujer-5.jpg" class="carousel-img" alt="Fondo 3">
+        </div>
+
+        <div class="login-section">
+            <div class="login-box">
+                <img src="./img/logo_inaimpf.png" alt="Logo INAIMPF" class="login-logo">
+                <h2>Acceder</h2>
+                
+                <form id="loginForm" onsubmit="iniciarSesion(event)">
+                    <div class="form-group">
+                        <label>👤 Nombre de usuario</label>
+                        <input type="text" id="username" placeholder="Ej: admin" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>🔒 Contraseña</label>
+                        <input type="password" id="password" placeholder="Tu contraseña" required>
+                    </div>
+                    
+                    <button type="submit" class="btn-primary mt-25">Acceder al Sistema</button>
+                </form>
+            </div>
+            
+            <div id="notificacion" class="notificacion">
+                <p id="notificacion-texto"></p>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
