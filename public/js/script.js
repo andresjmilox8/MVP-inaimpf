@@ -737,6 +737,8 @@ function iniciarSesion(event) {
 
     // Credenciales maestras para tu defensa del proyecto
     if (user === "admin" && pass === "123456") {
+
+        sessionStorage.setItem("autenticado", "true");
         // Redirige al menú principal si los datos son correctos
         window.location.href = "dashboard.html";
     } else {
@@ -746,8 +748,33 @@ function iniciarSesion(event) {
 
 // 3. Función global para cerrar sesión (Úsala en tu Navbar)
 function cerrarSesion() {
+
+    // 👇 Destruimos el "Pase VIP" al salir
+    sessionStorage.removeItem("autenticado");
     window.location.href = "login.html";
 }
+
+// 4. GUARDIA DE SEGURIDAD (Protección de Rutas)
+function verificarSeguridad() {
+    // Vemos en qué página está intentando entrar el usuario
+    const paginaActual = window.location.pathname;
+    
+    // Verificamos si tiene el pase en el bolsillo
+    const tieneAcceso = sessionStorage.getItem("autenticado") === "true";
+
+    // Si NO tiene acceso y NO está en la página de login... ¡Lo echamos al login!
+    if (!tieneAcceso && !paginaActual.includes("login.html")) {
+        window.location.href = "login.html";
+    }
+    
+    // Si SÍ tiene acceso (ya inició sesión) y trata de ir al login, lo mandamos al dashboard
+    if (tieneAcceso && paginaActual.includes("login.html")) {
+        window.location.href = "dashboard.html";
+    }
+}
+
+// Ejecutamos al guardia inmediatamente carga el script
+verificarSeguridad();
 
 // Iniciamos el carrusel cuando la ventana cargue
 window.addEventListener('load', () => {
